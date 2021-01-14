@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-@ContextConfiguration(classes = CustomerConfig.class)
+@ContextConfiguration(classes = DomainConfig.class)
 public class CustomerRepositoryTest {
 
     @Autowired

@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableJdbcRepositories
-public class CustomerConfig extends AbstractJdbcConfiguration {
+public class DomainConfig extends AbstractJdbcConfiguration {
 
     @Bean
     NamedParameterJdbcOperations operations() {
@@ -32,7 +32,7 @@ public class CustomerConfig extends AbstractJdbcConfiguration {
         return new EmbeddedDatabaseBuilder()
                 .generateUniqueName(true)
                 .setType(EmbeddedDatabaseType.HSQL)
-                .addScript("create-customer-schema.sql")
+                .addScript("create-schema.sql")
                 .build();
     }
 }
