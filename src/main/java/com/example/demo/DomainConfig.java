@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 @EnableJdbcRepositories
 public class DomainConfig extends AbstractJdbcConfiguration {
 
+
     @Bean
     NamedParameterJdbcOperations operations() {
         return new NamedParameterJdbcTemplate(dataSource());

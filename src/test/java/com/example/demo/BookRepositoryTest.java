@@ -7,6 +7,7 @@ import com.example.demo.book.BookRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,10 +24,12 @@ public class BookRepositoryTest {
     @Autowired
     private AuthorRepository authorRepository;
 
+    @Autowired
+    private JdbcAggregateTemplate aggregateTemplate;
+
     @Test
     public void booksAndAuthors() {
-        Author author = new Author();
-        author.name = "Greg L. Turnquist";
+        Author author = new Author(1L, "Greg L. Turnquist");
 
         author = authorRepository.save(author);
 
@@ -39,5 +42,21 @@ public class BookRepositoryTest {
         bookRepository.deleteAll();
 
         assertThat(authorRepository.count()).isEqualTo(1);
+    }
+
+    @Test
+    public void authors() {
+        Author author = new Author(1l, "APJ");
+
+        aggregateTemplate.insert(author);
+
+        Author byId = authorRepository.findById(1L).get();
+        byId.setName("Kalam");
+
+        aggregateTemplate.update(byId);
+
+        Author updated = authorRepository.findById(1L).get();
+
+        System.out.println(updated);
     }
 }

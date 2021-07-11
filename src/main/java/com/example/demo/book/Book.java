@@ -20,10 +20,10 @@ public class Book {
 
     private AuthorRef createAuthorRef(Author author) {
         Assert.notNull(author, "Author must not be null");
-        Assert.notNull(author.id, "Author id, must not be null");
+        Assert.notNull(author.getId(), "Author id, must not be null");
 
         AuthorRef authorRef = new AuthorRef();
-        authorRef.author = author.id;
+        authorRef.author = author.getId();
         return authorRef;
     }
 }
